@@ -69,7 +69,8 @@ void f ( int n )
   int i;
   int *x;
 
-  x = ( int * ) malloc ( (n+1) * sizeof ( int ) );
+  //x = ( int * ) malloc ( (n+1) * sizeof ( int ) );
+  x = new int [n+1];
 
   x[0] = 1;
   cout << "  " << 0 << "  " << x[0] << "\n";
@@ -83,8 +84,8 @@ void f ( int n )
     cout << "  " << i << "  " << x[i] << "\n";
   }
 
-  //delete [] x;
-  free(x);
+  delete [] x;
+  //free(x);
 
   return;
 }
