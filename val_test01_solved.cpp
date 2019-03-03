@@ -69,6 +69,8 @@ void f ( int n )
   int i;
   int *x;
 
+  // Initialize x using new (so that it works with delete)
+  // and have n+1 entries rather than n
   //x = ( int * ) malloc ( (n+1) * sizeof ( int ) );
   x = new int [n+1];
 
@@ -85,7 +87,6 @@ void f ( int n )
   }
 
   delete [] x;
-  //free(x);
 
   return;
 }
