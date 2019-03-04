@@ -26,6 +26,23 @@ void MMult0(long m, long n, long k, double *a, double *b, double *c) {
 
 void MMult1(long m, long n, long k, double *a, double *b, double *c) {
   // TODO: See instructions below
+  // algorithm learned from: http://csapp.cs.cmu.edu/2e/waside/waside-blocking.pdf
+  int x, y, z, zz, yy;
+  double sum;
+
+  for (zz = 0; zz < k; zz += BLOCK_SIZE) {
+    for (yy = 0; yy < n; yy += BLOCK_SIZE) {
+      for (x = 0; x < m; x++) {
+	for (y = yy; y < yy + BLOCK_SIZE; y++) {
+	  sum = c[x+y*m];
+	  for (z = zz; z < zz + BLOCK_SIZE; z++) {
+	    sum += a[x+z*m] * b[z+y*k];
+	  }
+	  c[x+y*m] = sum;
+	}
+      }
+    }
+  }
 }
 
 int main(int argc, char** argv) {
@@ -57,6 +74,7 @@ int main(int argc, char** argv) {
     for (long rep = 0; rep < NREPEATS; rep++) {
       MMult1(m, n, k, a, b, c);
     }
+
     double time = t.toc();
     double flops = 0; // TODO: calculate from m, n, k, NREPEATS, time
     double bandwidth = 0; // TODO: calculate from m, n, k, NREPEATS, time
