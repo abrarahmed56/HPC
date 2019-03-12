@@ -30,8 +30,11 @@ void MMult1(long m, long n, long k, double *a, double *b, double *c) {
   int x, y, z, zz, yy;
   double sum;
 
-  for (zz = 0; zz < k; zz += BLOCK_SIZE) {
-    for (yy = 0; yy < n; yy += BLOCK_SIZE) {
+  #ifdef _OPENMP
+  #pragma omp parallel for
+  #endif
+  for (yy = 0; yy < n; yy += BLOCK_SIZE) {
+    for (zz = 0; zz < k; zz += BLOCK_SIZE) {
       for (x = 0; x < m; x++) {
 	for (y = yy; y < yy + BLOCK_SIZE; y++) {
 	  sum = c[x+y*m];
@@ -76,8 +79,14 @@ int main(int argc, char** argv) {
     }
 
     double time = t.toc();
-    double flops = 0; // TODO: calculate from m, n, k, NREPEATS, time
-    double bandwidth = 0; // TODO: calculate from m, n, k, NREPEATS, time
+    // not certain flops and bandwidth are calculated correctly
+    // number of iterations are (k/BLOCK_SIZE) * (n/BLOCK_SIZE) * m * BLOCK_SIZE * BLOCK_SIZE
+    // in innermost loop, there are 2 memory accesses and 5 flops
+    // in second innermost loop, there are 2 memory accesses and 4 flops
+    double flops = m*(n/BLOCK_SIZE)*(k/BLOCK_SIZE)*BLOCK_SIZE*(4+BLOCK_SIZE*5) * NREPEATS / (1e9*time);
+    // for bandwidth, multiply by sizeof(double) for bits per double
+    // and divide by 8 to get bytes instead of bits
+    double bandwidth = m*(n/BLOCK_SIZE)*(k/BLOCK_SIZE)*BLOCK_SIZE*(2+BLOCK_SIZE*2) * NREPEATS * sizeof(double) / (1e9*time*8);
     printf("%10d %10f %10f %10f", p, time, flops, bandwidth);
 
     double max_err = 0;
