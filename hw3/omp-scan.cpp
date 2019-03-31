@@ -15,6 +15,31 @@ void scan_seq(long* prefix_sum, const long* A, long n) {
 
 void scan_omp(long* prefix_sum, const long* A, long n) {
   // TODO: implement multi-threaded OpenMP scan
+  int num_threads;
+  long num_to_process;
+  #pragma omp parallel
+  {
+    num_threads = omp_get_num_threads();
+    int thread_id = omp_get_thread_num();
+    num_to_process = n / num_threads;
+    long start_index = thread_id * num_to_process;
+    if (thread_id == 0) {
+      prefix_sum[start_index] = 0;
+    }
+    else {
+      prefix_sum[start_index] = A[start_index-1];
+    }
+    for (long i = start_index+1; i < num_to_process+start_index; i++) {
+      prefix_sum[i] = prefix_sum[i-1] + A[i-1];
+    }
+  }
+  for (int i = 1; i < num_threads; i++) {
+    long amount_to_add = prefix_sum[(num_to_process*i)-1];
+    #pragma omp parallel for
+    for (long j = num_to_process*i; j < num_to_process*(i+1); j++) {
+      prefix_sum[j] = prefix_sum[j] + amount_to_add;
+    }
+  }
 }
 
 int main() {
