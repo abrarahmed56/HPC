@@ -27,8 +27,51 @@ void sin4_reference(double* sinx, const double* x) {
   for (long i = 0; i < 4; i++) sinx[i] = sin(x[i]);
 }
 
+/*
+A simple approach to make our function more accurate for the intervals
+outside [-pi, pi] is to keep adding/subtracting 2pi until it gets to that
+interval. But the problem asks about getting it to the interval within
+[-pi/4, pi/4]. In this case, the first step is very similar.
+Keep adding/subtracting pi/2 until it goes to within this interval, keeping
+track of how many times this was done.
+Use the formula e^(i*(theta+pi/2))=ie^(i*theta)
+The number of times pi/2 was added or subtracted determines the exponent on i
+in the right side of this equation
+For example, if we have x=3pi/2, we have to subtract pi/4 a total of 2 times to
+get it to pi/2.
+Then, e^(i*(3pi/2)) = (i^2)*e^(i*(pi/2))
+
+Then, we use the equation:
+e^(i*theta) = cos(theta) + i*sin(theta)
+
+e^(i*(theta+pi/2))=ie^(i*theta)
+e^(i*theta) = cos(theta) + i*sin(theta)
+
+We use a different equation depending on our value for i:
+
+e^(i*(theta+pi/2))= ie^(i*theta) = icos(theta) - sin(theta)
+e^(i*(theta+pi))= (i^2)e^(i*theta) = -cos(theta) - isin(theta)
+e^(i*(theta+3pi/2))= (i^3)e^(i*theta) = -icos(theta) + sin(theta)
+e^(i*(theta+2pi))= (i^4)e^(i*theta) = e^(i*theta) = cos(theta) + i*sin(theta)
+
+In the case of the last equation, we can just approximate sin(x) using
+a Taylor series as before
+Otherwise, we use a different equation
+
+Not certain where to go from here.
+ */
+
 void sin4_taylor(double* sinx, const double* x) {
   for (int i = 0; i < 4; i++) {
+    /*
+      int count = 0;
+      if (x < 0) {
+        while (x < pi/4) {
+	  x += pi/2;
+	  count++;
+	}
+      }
+     */
     double x1  = x[i];
     double x2  = x1 * x1;
     double x3  = x1 * x2;
@@ -94,7 +137,6 @@ void sin4_vector(double* sinx, const double* x) {
   s += x7  * c7;
   s += x9  * c9;
   s += x11 * c11;
-  //sinx[i] = s;
   s.StoreAligned(sinx);
 }
 
