@@ -1,7 +1,13 @@
-Architecture: Intel Core i7-5500U Processor
-
+My computer, Intel Core i7-5500U Processor:
 Thread number, time:
 8: 1.897003
 4: 1.883051
 2: 1.887845
 1: 1.929484
+
+Prince:
+Thread number, time:
+8: 0.109605
+4: 0.164330
+2: 0.375540
+1: 0.600967
