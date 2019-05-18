@@ -1,0 +1,33 @@
+Latency:
+
+N = 100:
+2 processors: 0.001279ms
+4 processors: 0.003014ms
+6 processors: 0.004588ms
+8 processors: 0.006717ms
+10 processors: 0.008743ms
+
+N = 100000:
+2 processors: 0.001241ms
+4 processors: 0.003003ms
+6 processors: 0.004989ms
+8 processors: 0.006414ms
+10 processors: 0.007946ms
+
+
+
+Bandwidth:
+
+N = 100:
+2 processors: 582.00 GB/s
+4 processors: 563.99 GB/s
+6 processors: 505.59 GB/s
+8 processors: 473.90 GB/s
+10 processors: 458.26 GB/s
+
+N = 100000:
+2 processors: 1528.84 GB/s
+4 processors: 1402.81 GB/s
+6 processors: 1246.79 GB/s
+8 processors: 1234.54 GB/s
+10 processors: 1226.21 GB/s

@@ -171,12 +171,14 @@ int main() {
 
   //double prod_ref, sum;
   double* prod_ref = (double*) (malloc(N * sizeof(double)));
-  //double* sum = (double*) (malloc(N * sizeof(double)));
-  double* sum;
-  cudaMallocHost(&sum, N*sizeof(double));
+  double* sum = (double*) (malloc(N * sizeof(double)));
+  //double* sum;
+  //cudaMallocHost(&sum, N*sizeof(double));
+
   double tt = omp_get_wtime();
   //reduction(&sum_ref, x, N);
   //vector_dot_product(&dot_product_ref, x1, x2, N);
+
   matrix_vector_product(prod_ref, v, M, N);
   printf("CPU Bandwidth = %f GB/s\n", 1*N*sizeof(double) / (omp_get_wtime()-tt)/1e9);
 
@@ -216,12 +218,11 @@ int main() {
     prod_ref_sum += prod_ref[i];
   }
   printf("Error = %f\n", diff);
-  printf("Sum sum = %f\n", sum_sum);
-  printf("Prod ref sum = %f\n", prod_ref_sum);
 
   cudaFree(v_d);
   cudaFree(M_d);
   cudaFree(y_d);
+
 
   cudaFreeHost(v);
   cudaFreeHost(M);

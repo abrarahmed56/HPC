@@ -1,0 +1,1 @@
+I would like to parallelize the Floyd-Warshall all-pairs shortest paths algorithm. Firstly through OpenMP, then we'll try to go further using MPI and/or CUDA. I may be working with Alexander Pollack.

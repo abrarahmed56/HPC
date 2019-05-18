@@ -1,0 +1,7 @@
+Abrar Ahmed and Alexander Pollack
+Parallelized Floyd-Warshall All Pairs Shortest Path
+
+We finished up the OMP version of the code after finding some bugs.
+Started thinking about how to implement this in MPI, and decided
+against using CUDA, as it would not benefit the algorithm to run
+it on a GPU.

@@ -1,0 +1,38 @@
+Matrix-vector multiplication:
+cuda1, GeForce GTX TITAN Black:
+CPU Bandwidth = 0.000372 GB/s
+GPU Bandwidth = 0.008688 GB/s
+
+
+cuda4, GeForce GTX TITAN X
+CPU Bandwidth = 0.000289 GB/s
+GPU Bandwidth = 4.108899 GB/s
+
+Doesn't seem to run on:
+cuda2, GeForce RTX 2080 Ti
+cuda3, TITAN V
+cuda5, GeForce GTX TITAN Z
+
+
+
+
+Jacobi:
+cuda1, GeForce GTX TITAN Black:
+Serial Jacobi time: 9.166646 s
+GPU Jacobi time: 1.876148 s
+
+cuda2, GeForce RTX 2080 Ti
+Serial Jacobi time: 13.644514 s
+GPU Jacobi time: 2.787625 s
+
+cuda3, TITAN V
+Serial Jacobi time: 30.826948 s
+GPU Jacobi time: 23.631751 s
+
+cuda4, GeForce GTX TITAN X
+Serial Jacobi time: 26.821547 s
+GPU Jacobi time: 3.340454 s
+
+cuda5, GeForce GTX TITAN Z
+Serial Jacobi time: 48.738425 s
+GPU Jacobi time: 13.742686 s

@@ -1,0 +1,53 @@
+Project: Creating a High-Performance Floyd-Warshall All Pairs Shortest Path
+
+
+
+Abrar Ahmed and Alexander Pollack
+
+__________________________________________________________________________________
+
+
+
+04/15-04/21: Abrar, Alex
+
+Devise an approach for parallelizing, discuss what aspects of the 
+
+algorithm we're interested in studying 
+
+__________________________________________________________________________________
+
+
+
+04/22-04/28: Abrar, Alex
+
+Set up first serial implementation as a standard, as well as first parallel OpenMP
+
+version. Set up timings on small known graph system and set up random graph system.
+
+__________________________________________________________________________________
+
+
+
+04/29-05/05: Abrar, Alex
+
+Test on larger variable sized graph system, compare and find optimal specifics
+
+(# threads for different sized graphs, etc.). Set up CUDA version and compare GPU 
+
+and CPU versions.
+
+
+
+__________________________________________________________________________________
+
+05/06-05/12: Abrar, Alex
+
+Finish implementations and finalize code.
+
+
+
+__________________________________________________________________________________
+
+05/13-05/19: Abrar, Alex
+
+Work on presentation slides and write up report
